@@ -1,11 +1,10 @@
 #!/bin/bash
 
 BRANCH_NAME="$1"
-BRANCH_TO_MERGE_FROM="$2"
-BRANCH_TO_MERGE_INTO="$3"
-BRANCH_TO_REBASE_ONTO="$4"
-BRANCH_TO_REBASE="$5"
-BRANCH_TO_DELETE="$6"
+BRANCH1="$2"
+BRANCH2="$3"
+
+
 create_branch() {
     echo "Creating branch: $BRANCH_NAME"
     git checkout -b "$BRANCH_NAME"
@@ -20,26 +19,26 @@ list_branches() {
 }
 
 merge_branches() {
-    echo "Merging branch $BRANCH_TO_MERGE_FROM into $BRANCH_TO_MERGE_INTO"
-    git checkout "$BRANCH_TO_MERGE_INTO"
+    echo "Merging branch $BRANCH1 into $BRANCH2"
+    git checkout "$BRANCH1"
   
 
-    git merge "$BRANCH_TO_MERGE_FROM"
+    git merge "$BRANCH1"
  
 }
 
 rebase_branches() {
-    echo "Rebasing branch $BRANCH_TO_REBASE onto $BRANCH_TO_REBASE_ONTO"
-    git checkout "$BRANCH_TO_REBASE"
+    echo "Rebasing branch $BRANCH1 onto $BRANCH2"
+    git checkout "$BRANCH1"
 
 
-    git rebase "$BRANCH_TO_REBASE_ONTO"
+    git rebase "$BRANCH2"
   
 }
 
 delete_branch() {
-    echo "Deleting branch: $BRANCH_TO_DELETE"
-    git branch -d "$BRANCH_TO_DELETE"
+    echo "Deleting branch: $BRANCH1"
+    git branch -d "$BRANCH1"
    
 }
 
@@ -48,5 +47,3 @@ list_branches
 merge_branches
 rebase_branches
 delete_branch
-
-send_notification "All Git operations completed successfully."
